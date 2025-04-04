@@ -1,0 +1,49 @@
+/* 🔹 Category Navbar */
+.category-navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 6px auto;
+    max-width: 89%;
+}
+
+/* 🔹 Category Items */
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+    padding: 4px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 🔹 Category Images */
+.category-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* 🔹 Category Text */
+.category-item span {
+    margin-top: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* 🔹 Hover Effects */
+.category-item:hover {
+    transform: scale(1.08);
+}
+
+.category-item:hover img {
+    transform: scale(1.12);
+}

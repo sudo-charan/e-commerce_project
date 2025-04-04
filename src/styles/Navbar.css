@@ -1,0 +1,132 @@
+/* 🔷 Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2874f0;
+  padding: 10px 130px;
+  height: 60px;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 🔷 Logo */
+.logo-link {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* 🔷 Search Bar */
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+  padding: 4px 10px;
+  width: 50%;
+  max-width: 600px;
+  height: 38px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  padding: 6px;
+}
+
+.search-icon {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #2874f0;
+  cursor: pointer;
+}
+
+/* 🔷 Right Section */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 🔷 Cart Button */
+.cartlink {
+  text-decoration: none;
+}
+
+.cart-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* 🔷 Profile Dropdown */
+.profile-dropdown {
+  position: relative;
+}
+
+/* Button that opens dropdown */
+.profile-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* ✅ Show dropdown when state is active */
+.dropdown-open {
+  display: block;
+}
+
+/* Links & buttons inside dropdown */
+.dropdown-content a,
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  gap: 10px;
+}
+
+/* Hover effect */
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+  background-color: #f5f5f5;
+  color: #2874f0;
+}

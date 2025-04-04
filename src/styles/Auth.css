@@ -1,0 +1,176 @@
+/* 🔹 Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 🔹 Authentication Box */
+.auth-box {
+    background: white;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 🔹 Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* 🔹 Auth Form */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Input Fields & Dropdowns */
+.auth-form input,
+.auth-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    border-color: #2874f0;
+}
+
+/* 🔹 Password Container */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.password-container input:focus {
+    border-color: #2874f0;
+    box-shadow: 0 0 5px rgba(40, 116, 240, 0.5);
+}
+
+/* 🔹 Eye Icon */
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.eye-icon:hover {
+    color: #2874f0;
+}
+
+/* 🔹 Admin Checkbox */
+.admin-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.admin-checkbox input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* 🔹 Submit Button */
+.auth-form button {
+    background: #fb641b;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-form button:hover {
+    background: #e05a17;
+}
+
+/* 🔹 Link Text */
+.link-text {
+    color: #2874f0;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.link-text:hover {
+    color: #004ba0;
+}
+
+/* 🔹 Dropdown Arrow Styling */
+.auth-form select {
+    appearance: none;
+    background: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23444' d='M2 0L0 2h4z'/></svg>") no-repeat;
+    background-position: right 10px center;
+    background-size: 8px;
+    padding-right: 25px;
+}
+
+/* 🔹 Animation */
+@keyframes fadeIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
