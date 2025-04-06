@@ -1,17 +1,18 @@
 const mysql = require('mysql');
+require('dotenv').config();
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',  // Change if you have a different MySQL user
-  password: '',  // Change if you have set a password
-  database: 'nittekart_db', // ✅ Correct database name
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
   if (err) {
-    console.error('❌ Database Connection Failed:', err.sqlMessage || err);
+    console.error('Database Connection Failed:', err.sqlMessage || err);
   } else {
-    console.log('✅ MySQL Connected!');
+    console.log('MySQL Connected!');
   }
 });
 

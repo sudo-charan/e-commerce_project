@@ -1,0 +1,33 @@
+.wrapper {
+    padding: 20px 20px;
+    margin: 0 100px;
+  }
+  
+  .wrapper-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .feature {
+    flex: 1 1 200px;
+    max-width: 250px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    color: #333;
+  }
+  

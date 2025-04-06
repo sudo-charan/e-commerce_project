@@ -1,5 +1,5 @@
 /* 🔹 Category Navbar */
-.category-navbar {
+.category-navbar1 {
     display: flex;
     justify-content: space-around;
     padding: 8px 100px;
@@ -7,10 +7,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 6px auto;
     max-width: 89%;
+    margin-top: 80px;
 }
 
 /* 🔹 Category Items */
-.category-item {
+.category-item1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +26,7 @@
 }
 
 /* 🔹 Category Images */
-.category-item img {
+.category-item1 img {
     width: 45px;
     height: 45px;
     object-fit: contain;
@@ -33,17 +34,17 @@
 }
 
 /* 🔹 Category Text */
-.category-item span {
+.category-item1 span {
     margin-top: 3px;
     font-size: 12px;
     font-weight: 500;
 }
 
 /* 🔹 Hover Effects */
-.category-item:hover {
+.category-item1:hover {
     transform: scale(1.08);
 }
 
-.category-item:hover img {
+.category-item1:hover img {
     transform: scale(1.12);
 }

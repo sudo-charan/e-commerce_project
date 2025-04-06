@@ -1,80 +1,80 @@
 const db = require("../config/db");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
-// -------------------- Register User --------------------
 exports.register = (req, res) => {
-  const { fullName, email, mobile, gender, password } = req.body;
+  const { fullName, email, gender, mobile, password } = req.body;
+  const full_name = fullName;
 
-  if (!fullName || !email || !mobile || !gender || !password) {
+  if (!full_name || !email || !gender || !mobile || !password) {
     return res.status(400).json({ success: false, message: "All fields are required" });
   }
 
   const checkUserSql = "SELECT * FROM users WHERE email = ? OR mobile = ?";
-  db.query(checkUserSql, [email, mobile], (err, results) => {
+  db.query(checkUserSql, [email, mobile], (err, existingUsers) => {
     if (err) {
-      console.error("Database Error:", err);
+      console.error("DB Error:", err);
       return res.status(500).json({ success: false, message: "Database error" });
     }
 
-    if (results.length > 0) {
+    if (existingUsers.length > 0) {
       return res.status(400).json({ success: false, message: "User already exists" });
     }
 
-    const insertSql = "INSERT INTO users (full_name, email, mobile, gender, password) VALUES (?, ?, ?, ?, ?)";
-    db.query(insertSql, [fullName, email, mobile, gender, password], (err) => {
+    const insertSql = "INSERT INTO users (full_name, email, gender, mobile, password) VALUES (?, ?, ?, ?, ?)";
+    db.query(insertSql, [full_name, email, gender, mobile, password], (err, result) => {
       if (err) {
-        console.error("Insert Error:", err);
-        return res.status(500).json({ success: false, message: "Failed to register user" });
+        console.error("DB Insert Error:", err);
+        return res.status(500).json({ success: false, message: "Registration failed" });
       }
 
-      res.json({ success: true, message: "User registered successfully" });
+      return res.status(201).json({ success: true, message: "User registered successfully" });
     });
   });
 };
 
-// -------------------- Login User/Admin --------------------
 exports.login = (req, res) => {
   const { emailOrPhone, password, isAdmin } = req.body;
 
   if (!emailOrPhone || !password) {
-    return res.status(400).json({ success: false, message: "Email/Phone and password are required" });
+    return res.status(400).json({ success: false, message: "All fields are required" });
   }
 
-  // Always query from users table (admins are treated as special users)
-  const sql = `SELECT * FROM users WHERE email = ? OR mobile = ?`;
+  if (isAdmin) {
+    const adminSql = "SELECT * FROM admins WHERE (email = ? OR phone = ?) AND password = ?";
+    db.query(adminSql, [emailOrPhone, emailOrPhone, password], (err, admins) => {
+      if (err) {
+        console.error("Admin Login Error:", err);
+        return res.status(500).json({ success: false, message: "Database error" });
+      }
 
-  db.query(sql, [emailOrPhone, emailOrPhone], (err, results) => {
-    if (err) {
-      console.error("Database Error:", err);
-      return res.status(500).json({ success: false, message: "Database error" });
-    }
+      if (admins.length === 0) {
+        return res.status(401).json({ success: false, message: "Invalid admin credentials" });
+      }
 
-    if (results.length === 0) {
-      return res.status(400).json({ success: false, message: "User not found" });
-    }
-
-    const user = results[0];
-
-    if (user.password !== password) {
-      return res.status(401).json({ success: false, message: "Invalid credentials" });
-    }
-
-    // You can later enhance this by checking a "role" column in the users table
-    const role = isAdmin ? "admin" : "user";
-
-    const tokenPayload = {
-      id: user.user_id,
-      email: user.email,
-      role: role
-    };
-
-    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-    res.json({
-      success: true,
-      token,
-      username: user.full_name
+      return res.status(200).json({
+        success: true,
+        message: "Admin login successful",
+        username: admins[0].name,
+        isAdmin: true,
+      });
     });
-  });
+  } else {
+    const userSql = "SELECT * FROM users WHERE (email = ? OR mobile = ?) AND password = ?";
+    db.query(userSql, [emailOrPhone, emailOrPhone, password], (err, users) => {
+      if (err) {
+        console.error("User Login Error:", err);
+        return res.status(500).json({ success: false, message: "Database error" });
+      }
+
+      if (users.length === 0) {
+        return res.status(401).json({ success: false, message: "Invalid credentials" });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Login successful",
+        username: users[0].full_name,
+        isAdmin: false,
+      });
+    });
+  }
 };

@@ -1,0 +1,55 @@
+/* Wrapper for dashboard and sidebar */
+.admin-dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f1f3f6;
+}
+
+/* Content area excluding sidebar */
+.admin-dashboard-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #f1f3f6;
+  margin-left: 250px; /* Add this line */
+}
+
+/* Heading */
+.admin-dashboard-content h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+/* Grid layout for admin options */
+.admin-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 0 40px;
+}
+
+/* Cards for admin sections */
+.admin-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  background-color: #e3f2fd;
+}
+
+.admin-card h3 {
+  margin-bottom: 10px;
+  color: #1976d2;
+}
+
+.admin-card p {
+  color: #555;
+}

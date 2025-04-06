@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  FaSearch, FaShoppingCart, FaUser, FaChevronDown, FaSignInAlt,
-  FaUserPlus, FaHeart, FaBox, FaSignOutAlt, FaUserCircle
+  FaSearch,
+  FaShoppingCart,
+  FaUser,
+  FaChevronDown,
+  FaSignInAlt,
+  FaUserPlus,
+  FaHeart,
+  FaBox,
+  FaSignOutAlt,
+  FaUserCircle,
 } from "react-icons/fa";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import "../styles/Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ setSelectedCategory }) => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -16,6 +24,7 @@ const Navbar = () => {
   const [username, setUsername] = useState("");
   const [dropdownClicked, setDropdownClicked] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("userToken");
@@ -67,17 +76,23 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
     setIsAuthenticated(false);
     setUsername("");
+  };
+
+  const handleLogoClick = () => {
+    setSelectedCategory(null); // reset category if needed
+    navigate("/");
   };
 
   return (
     <>
       <nav className="navbar">
         <div className="navbar-left">
-          <Link to="/" className="logo-link">
+          <span className="logo-link" onClick={handleLogoClick}>
             <span className="logo">Nittekart</span>
-          </Link>
+          </span>
         </div>
 
         <div className="search-box">
@@ -94,14 +109,13 @@ const Navbar = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <button
-              className="profile-button"
-              onClick={handleDropdownClick}
-            >
+            <button className="profile-button" onClick={handleDropdownClick}>
               <FaUser /> {isAuthenticated ? username : "More"} <FaChevronDown />
             </button>
 
-            <div className={`dropdown-content ${dropdownOpen ? "dropdown-open" : ""}`}>
+            <div
+              className={`dropdown-content ${dropdownOpen ? "dropdown-open" : ""}`}
+            >
               {!isAuthenticated ? (
                 <>
                   <button onClick={() => setShowSignIn(true)}>
@@ -113,9 +127,22 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/profile">
+                  <button
+                    onClick={() => {
+                      const userId = localStorage.getItem("userId");
+                      if (!userId) {
+                        alert("User not logged in. Please sign in first.");
+                        return;
+                      }
+                      window.dispatchEvent(
+                        new CustomEvent("openProfileModal", {
+                          detail: { userId },
+                        })
+                      );
+                    }}
+                  >
                     <FaUserCircle /> Profile
-                  </Link>
+                  </button>
                   <Link to="/orders">
                     <FaBox /> Orders
                   </Link>
@@ -138,8 +165,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {showSignIn && <SignIn closeModal={() => setShowSignIn(false)} switchForm={switchForm} />}
-      {showSignUp && <SignUp closeModal={() => setShowSignUp(false)} switchForm={switchForm} />}
+      {showSignIn && (
+        <SignIn closeModal={() => setShowSignIn(false)} switchForm={switchForm} />
+      )}
+      {showSignUp && (
+        <SignUp closeModal={() => setShowSignUp(false)} switchForm={switchForm} />
+      )}
     </>
   );
 };
