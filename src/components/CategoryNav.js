@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/CategoryNavbar.css";
 
+// ✅ Ensure these category names match exactly with those in your DB
 const categories = [
   { name: "Home", image: "/assets/home-icon.png" },
   { name: "Mobiles", image: "/assets/22fddf3c7da4c4f4.png" },
@@ -12,22 +13,27 @@ const categories = [
   { name: "Two Wheelers", image: "/assets/05d708653beff580.png" },
 ];
 
-const CategoryNav = ({ setSelectedCategory }) => {
+const CategoryNav = ({ setSelectedCategory, selectedCategory }) => {
+  const handleClick = (categoryName) => {
+    setSelectedCategory(categoryName === "Home" ? null : categoryName);
+  };
+
   return (
     <nav className="category-navbar1">
       {categories.map((category, index) => (
         <button
           key={index}
-          className="category-item1"
-          onClick={() =>
-            setSelectedCategory(category.name === "Home" ? null : category.name)
-          }
+          className={`category-item1 ${
+            selectedCategory === category.name ? "active" : ""
+          }`}
+          onClick={() => handleClick(category.name)}
         >
           <img
             src={process.env.PUBLIC_URL + category.image}
             alt={category.name}
+            className="category-icon"
           />
-          <span>{category.name}</span>
+          <span className="category-name">{category.name}</span>
         </button>
       ))}
     </nav>

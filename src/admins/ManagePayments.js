@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminSidebar from "./adminComponents/AdminSidebar"; // ✅ Ensure the path is correct
-import "./styles/ManagePayments.css";
+import "./styles/AdminDashboard.css"; // Common layout styles
+import "./styles/ManagePayments.css"; // Component-specific styles
 
 const ManagePayments = () => {
   const [payments, setPayments] = useState([]);
@@ -25,7 +26,7 @@ const ManagePayments = () => {
     <div className="admin-dashboard-wrapper">
       <AdminSidebar />
 
-      <div className="manage-payments-container">
+      <div className="admin-dashboard-content">
         <h2>Manage Payments</h2>
         {error && <p className="error">{error}</p>}
         {payments.length === 0 ? (

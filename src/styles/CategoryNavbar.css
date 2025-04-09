@@ -7,7 +7,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 6px auto;
     max-width: 89%;
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 /* 🔹 Category Items */
@@ -23,6 +23,13 @@
     background: none;
     outline: none;
     cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+/* 🔹 Active Category */
+.category-item1.active {
+    border-bottom: 3px solid #2874f0;
+    color: #2874f0;
 }
 
 /* 🔹 Category Images */

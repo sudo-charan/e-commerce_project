@@ -34,6 +34,8 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
   const { emailOrPhone, password, isAdmin } = req.body;
 
+  console.log("Login attempt:", req.body); // ✅ Debug
+
   if (!emailOrPhone || !password) {
     return res.status(400).json({ success: false, message: "All fields are required" });
   }
@@ -55,6 +57,7 @@ exports.login = (req, res) => {
         message: "Admin login successful",
         username: admins[0].name,
         isAdmin: true,
+        token: "dummy-admin-token"
       });
     });
   } else {
@@ -65,8 +68,10 @@ exports.login = (req, res) => {
         return res.status(500).json({ success: false, message: "Database error" });
       }
 
+      console.log("User Query Result:", users); // ✅ Debug
+
       if (users.length === 0) {
-        return res.status(401).json({ success: false, message: "Invalid credentials" });
+        return res.status(401).json({ success: false, message: "Invalid user credentials" });
       }
 
       return res.status(200).json({
@@ -74,6 +79,7 @@ exports.login = (req, res) => {
         message: "Login successful",
         username: users[0].full_name,
         isAdmin: false,
+        token: "dummy-user-token"
       });
     });
   }

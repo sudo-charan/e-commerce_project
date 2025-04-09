@@ -11,11 +11,15 @@ const db = require("./config/db");
 app.use(cors());
 app.use(express.json());
 
+// ✅ Serve static files for uploaded product images
+app.use("/productImgs", express.static("public/productImgs"));
+
 // ✅ Route Imports
 const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userAdminRoutes = require("./routes/userAdminRoutes");
+const categoryRoutes = require("./routes/categoryRoutes"); // ✅ NEW
 
 // ✅ Optional: Use this only if orderRoutes.js exists
 let orderRoutes;
@@ -31,7 +35,8 @@ app.use("/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/admin/users", userAdminRoutes);
-
+app.use("/api/categories", categoryRoutes); // ✅ NEW
+app.use("/products", productRoutes);
 
 // ✅ Server Start
 const PORT = process.env.PORT || 5000;

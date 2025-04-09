@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import AdminSidebar from './adminComponents/AdminSidebar'; // ✅ Make sure path is correct
-import './styles/ManageOrders.css';
+// src/pages/admin/ManageOrders.js
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import AdminSidebar from "./adminComponents/AdminSidebar";
+import "./styles/ManageOrders.css";
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,9 +13,10 @@ const ManageOrders = () => {
     try {
       const res = await axios.get("http://localhost:5000/api/orders/all-orders");
       setOrders(res.data);
-      setLoading(false);
     } catch (err) {
       console.error("Error fetching orders:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -22,7 +24,7 @@ const ManageOrders = () => {
     try {
       setUpdatingId(orderId);
       await axios.put(`http://localhost:5000/api/orders/update-status/${orderId}`, {
-        status: newStatus
+        status: newStatus,
       });
       fetchOrders();
     } catch (err) {
@@ -36,12 +38,11 @@ const ManageOrders = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <p>Loading orders...</p>;
+  if (loading) return <p className="loading-msg">Loading orders...</p>;
 
   return (
     <div className="admin-dashboard-wrapper">
       <AdminSidebar />
-
       <div className="manage-orders">
         <h2>Manage Orders</h2>
         <table className="orders-table">

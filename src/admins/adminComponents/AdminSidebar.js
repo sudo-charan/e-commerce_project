@@ -5,11 +5,23 @@ import {
   FaUsers,
   FaMoneyCheckAlt,
   FaSignOutAlt,
-  FaClipboardList
+  FaClipboardList,
 } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Use Link
 import "./AdminSidebar.css";
 
-const AdminSidebar = ({ adminName = "Admin", adminEmail = "admin@example.com", onLogout }) => {
+const AdminSidebar = ({
+  adminName = "Admin",
+  adminEmail = "admin@example.com",
+  onLogout,
+}) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (onLogout) onLogout(); // Clear storage if needed
+    navigate("/"); // Redirect to Home
+  };
+
   return (
     <div className="admin-sidebar">
       <div className="admin-header">
@@ -21,15 +33,15 @@ const AdminSidebar = ({ adminName = "Admin", adminEmail = "admin@example.com", o
       </div>
 
       <nav className="admin-nav">
-        <a href="/admin/dashboard"><FaTachometerAlt /> Dashboard</a>
-        <a href="/admin/products"><FaBoxOpen /> Products</a>
-        <a href="/admin/orders"><FaClipboardList /> Orders</a> {/* 👈 Added this */}
-        <a href="/admin/users"><FaUsers /> Users</a>
-        <a href="/admin/payments"><FaMoneyCheckAlt /> Payments</a>
+        <Link to="/admin/dashboard"><FaTachometerAlt /> Dashboard</Link>
+        <Link to="/admin/products"><FaBoxOpen /> Products</Link>
+        <Link to="/admin/orders"><FaClipboardList /> Orders</Link>
+        <Link to="/admin/users"><FaUsers /> Users</Link>
+        <Link to="/admin/payments"><FaMoneyCheckAlt /> Payments</Link>
       </nav>
 
       <div className="admin-logout">
-        <button onClick={onLogout}>
+        <button onClick={handleLogout}>
           <FaSignOutAlt /> Logout
         </button>
       </div>

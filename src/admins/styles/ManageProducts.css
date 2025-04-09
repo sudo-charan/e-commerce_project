@@ -1,14 +1,13 @@
-.manage-products {
-  padding: 30px;
-  background: #f5f5f5;
+.manage-products-page {
+  background-color: #f9f9f9;
   min-height: 100vh;
-  margin-left: 250px;
+  margin-left: 130px;
 }
 
-.manage-products h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2c3e50;
+.manage-products-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .product-form {
@@ -16,55 +15,72 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  width: 70vw;
 }
 
-.product-form input {
+.product-form input,
+.product-form select {
   flex: 1 1 200px;
   padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+}
+
+.product-form textarea {
+  width: 98%;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .product-form button {
   padding: 10px 20px;
-  background-color: #1976d2;
-  color: white;
   border: none;
+  background: #0072ff;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-.products-table {
-  width: 100%;
-  border-collapse: collapse;
+.cancel-btn {
+  background: #999;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-item {
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.products-table th, .products-table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-.products-table th {
-  background-color: #1976d2;
-  color: white;
-}
-
-.products-table .delete-btn {
-  background-color: #e53935;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.products-table .delete-btn:hover {
-  background-color: #d32f2f;
+.product-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
 }

@@ -18,8 +18,6 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard-wrapper">
       <AdminSidebar
-        adminName="Charanraj"
-        adminEmail="charanraj@nitte.edu"
         onLogout={handleLogout}
       />
 

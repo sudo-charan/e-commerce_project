@@ -4,7 +4,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Auth.css";
 
 const SignIn = ({ closeModal, switchForm }) => {
-  const [formData, setFormData] = useState({ emailOrPhone: "", password: "", isAdmin: false });
+  const [formData, setFormData] = useState({
+    emailOrPhone: "",
+    password: "",
+    isAdmin: false
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,8 +21,11 @@ const SignIn = ({ closeModal, switchForm }) => {
     e.preventDefault();
     setError("");
 
+    console.log("Login form data:", formData); // ✅ Debug
+
     try {
       const response = await axios.post("http://localhost:5000/auth/login", formData);
+
       if (response.data.success) {
         if (formData.isAdmin) {
           localStorage.setItem("adminToken", response.data.token);
@@ -26,7 +34,6 @@ const SignIn = ({ closeModal, switchForm }) => {
           localStorage.setItem("userToken", response.data.token);
           localStorage.setItem("username", response.data.username);
 
-          // ✅ Dispatch login event for instant update
           window.dispatchEvent(new CustomEvent("userLogin", {
             detail: { username: response.data.username }
           }));
@@ -37,7 +44,8 @@ const SignIn = ({ closeModal, switchForm }) => {
         setError(response.data.message || "Invalid login credentials");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "An error occurred. Please try again.");
+      console.error("Login Error:", error); // ✅ Debug
+      setError(error.response?.data?.message || "Login failed. Please try again.");
     }
   };
 
